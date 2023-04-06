@@ -1,8 +1,11 @@
 # sets the configuration file to connent to a server without typing a passsword
-file { '/home/ubuntu/.ssh/config':
-  ensure  => present,
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  mode    => '0600',
-  content => "Host remote_server\n  Hostname 100.25.137.152\n  User ubuntu\n  IdentityFile ~/.ssh/school\n",
+class ssh_config {
+  file { 'alx-system_engineering-devops/0x0B-ssh/.ssh/config':
+    ensure  => file,
+    content => "# Puppet-managed file. Do not edit.\n
+    HostName 100.25.137.152
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no\n",
+  }
 }
