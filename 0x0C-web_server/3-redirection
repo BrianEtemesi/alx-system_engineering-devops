@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# configures a server so that /redirect_me is redirecting to another page.
+
+# replace the old block with the new block in the nginx configuration file
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/BrianEtemesi permanent;/" /etc/nginx/sites-available/default
+
+# reload Nginx to apply changes
+sudo service nginx restart
