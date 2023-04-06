@@ -1,3 +1,4 @@
+# sets the configuration file to connent to a server without typing a passsword
 file { '/home/ubuntu/.ssh/config':
   ensure  => present,
   owner   => 'ubuntu',
