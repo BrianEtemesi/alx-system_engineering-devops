@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Configures Nginx server to have a custom 404 page that contains the string `Ceci n'est pas une page`
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Create Hello World page
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+
+# replace the old block with the new block in the nginx configuration file
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/BrianEtemesi permanent;/" /etc/nginx/sites-available/default
+
+# Define the custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# Use sed to modify the Nginx configuration file
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/BrianEtemesi permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
+
+# Reload Nginx to apply the changes
+sudo service nginx restart
