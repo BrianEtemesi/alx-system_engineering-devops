@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
-# Script that installs Nginx server
+# Installs Nginx on server web-01
+
 # Update the package index
 sudo apt-get update
 
 ## Install Nginx
 sudo apt-get install nginx -y
 
-## Configure Nginx
-echo "server {
-        listen 80 default_server;
-        root /var/www/html;
-        index index.html;
-        server_name _;
-        location / {
-                # Return Hello World! as the response
-                echo 'Hello World!';
-        }
-}" | sudo tee /etc/nginx/sites-available/default
+# Create Hello World page
+echo 'Hello World!' | sudo tee /var/www/html/index.html
 
 # Restart Nginx
-sudo /etc/init.d/nginx restart
+sudo service nginx restart
