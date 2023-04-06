@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Configures to server without typing a password
+
+# check is the SSH configuration file exists
+if [ ! -f ~/.ssh/config ]
+then
+	# create the ssh configuration file if it does not exist
+	touch ~/.ssh/config
+fi
+
+# Add the SSH configuration to the file
+echo "
+Host myserver
+	Hostname 100.25.137.152
+	User ubuntu
+	IdentityFile ~/.ssh/school
+" >> ~/.ssh/config
+
+# Change permissions of the SSH directory amd key file
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/school
