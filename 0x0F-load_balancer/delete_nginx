@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# this script uninstalls Nginx and deletes all Nginx configuration files
+
+sudo systemctl stop nginx
+sudo apt-get remove nginx
+sudo apt-get purge nginx
+sudo apt-get autoremove
+sudo rm -rf /etc/nginx
+sudo rm -rf /var/log/nginx
+sudo rm -rf /var/cache/nginx/
+sudo rm -rf /usr/lib/systemd/system/nginx.service
+sudo apt-get purge nginx nginx-common
