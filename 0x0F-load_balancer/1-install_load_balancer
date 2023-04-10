@@ -1,18 +1,30 @@
 #!/usr/bin/env bash
-# install and configure HAproxy to send traffic to 100.25.137.152 and 35.168.1.108
+#installation of HAproxy
+#Server configuration with hostname
 
-# Install HAproxy
-sudo apt-get update
-sudo apt-get install haproxy=2.0.\*
+# install HAproxy
+sudo apt -y install haproxy
 
-# configure HAproxy to send traffic to server 1 and 2 using round robin algorithm
-echo -e "\nfrontend http\n\tbind *:80\n\tmode http\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 116170-web-01 100.25.137.152:80 check\n\tserver 116170-web-02 35.168.1.108:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+# save frontend config in a variable
+configFrontend='''
+frontend myFrontend
+        bind :80
+        default_backend myBackend
+'''
 
-# enable HAproxy to be started by an init script
-# echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+# save backend config in a variable
+configBackend='''
+backend myBackend
+        balance roundrobin
+        server 116170-web-01 100.25.137.152:80 check
+        server 116170-web-02 35.168.1.108:80 check
+'''
 
-# restart HAproxy to apply changes
-# sudo service haproxy restart
+# configure HAproxy
+cat <<EOF >> /etc/haproxy/haproxy.cfg
+$configFrontend
+$configBackend
+EOF
 
 sudo /etc/init.d/haproxy start
 sudo update-rc.d haproxy defaults
