@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# script to ssh to our loadbalancer
+ssh ubuntu@100.25.34.17 -i ~/.ssh/school
