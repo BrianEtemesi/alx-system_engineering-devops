@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# runs a program as the user passed as argument
+
+if [ $# -eq 1 ]
+then
+	sudo -u "$1" 'whoami'
+else
+	echo 'pass one argument only'
+fi
