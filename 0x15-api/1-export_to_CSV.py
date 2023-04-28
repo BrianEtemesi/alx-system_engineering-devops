@@ -24,9 +24,9 @@ if __name__ == "__main__":
 
     # create a CSV file with format USER_ID.csv
     file_name = "{}.csv".format(argv[1])
-    with open(file_name, 'w') as file:
+    with open(file_name, 'w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         # copy data to CSV file
         for task in to_json:
-            writer.writerow([user_id, name, task['completed'], task['title']])
+            writer.writerow([task['userId'], name, task['completed'], task['title']])
