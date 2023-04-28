@@ -15,9 +15,7 @@ if __name__ == "__main__":
     user_id = int(argv[1])
     url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
     res = requests.get(url)
-    full_name = res.json().get('name')
-    names = full_name.split()
-    name = names[0]
+    name = res.json().get('name')
 
     # get todo list object associated with user
     url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(user_id)
