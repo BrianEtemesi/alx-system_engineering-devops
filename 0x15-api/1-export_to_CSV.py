@@ -14,7 +14,9 @@ if __name__ == "__main__":
     # get user object to obtain user attributes
     url = 'https://jsonplaceholder.typicode.com/users/{}'.format(argv[1])
     res = requests.get(url)
-    name = res.json().get('name')
+    full_name = res.json().get('name')
+    names = full_name.split()
+    name = names[0]
 
     # get todo list object associated with user
     url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1])
