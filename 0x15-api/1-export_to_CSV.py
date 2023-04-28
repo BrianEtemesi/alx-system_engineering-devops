@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     # create a CSV file with format USER_ID.csv
     file_name = "{}.csv".format(argv[1])
-    with open(file_name, 'w', newline='') as file:
+    with open(file_name, 'w') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         # copy data to CSV file
