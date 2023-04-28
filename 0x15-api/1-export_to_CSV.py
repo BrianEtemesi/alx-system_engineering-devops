@@ -12,14 +12,15 @@ from sys import argv
 if __name__ == "__main__":
 
     # get user object to obtain user attributes
-    url = 'https://jsonplaceholder.typicode.com/users/{}'.format(argv[1])
+    user_id = int(argv[1])
+    url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
     res = requests.get(url)
     full_name = res.json().get('name')
     names = full_name.split()
     name = names[0]
 
     # get todo list object associated with user
-    url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1])
+    url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(user_id)
     res = requests.get(url)
     to_json = res.json()
 
@@ -30,4 +31,4 @@ if __name__ == "__main__":
 
         # copy data to CSV file
         for task in to_json:
-            writer.writerow([argv[1], name, task['completed'], task['title']])
+            writer.writerow([user_id, name, task['completed'], task['title']])
